@@ -5,21 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Colorfly | Industrial Color Fidelity</title>
 
-  <!-- =========================================================
-       NOTE:
-       - This is the single “source of truth” file.
-       - NO Unsplash links.
-       - NO local assets yet (we will plug those in later).
-       - Images below are safe inline SVG placeholders (data URIs).
-       - I only changed what you explicitly requested.
-       ========================================================= -->
-
   <style>
-    /* =========================================================
-       THEME TOKENS
-       - You asked to make #082460 the “dark theme” vibe AND default.
-       - Dark mode is default via <html class="dark"> above.
-       ========================================================= */
+    /* #082460 the “dark theme” .
+    Dark mode is default via <html class="dark"> above.*/
     :root{
       /* Brand accent used across titles/highlights */
       --brand: #3b82f6;
@@ -48,10 +36,7 @@
       --footer-chip: rgba(255,255,255,0.06);
     }
 
-    /* =========================================================
-       DARK THEME OVERRIDES
-       - You asked: dark theme color -> #082460
-       ========================================================= */
+    /* DARK THEME OVERRIDES #082460 */
     .dark{
       --card-bg: rgba(255,255,255,0.07);
       --card-border: rgba(255,255,255,0.14);
@@ -62,14 +47,14 @@
       --muted: rgba(241,245,249,0.82);
       --muted-2: rgba(241,245,249,0.62);
 
-      /* Dark mosaic tones tuned to your dark brand */
+      /* Dark mosaic dark brand */
       --mosaic-a: rgba(255,255,255,0.08);
       --mosaic-b: rgba(255,255,255,0.06);
 
       --mosaic-text: rgba(241,245,249,0.96);
       --mosaic-muted: rgba(241,245,249,0.74);
 
-      /* Footer background set to your requested dark hex */
+      /* Footer background  */
       --footer-bg: #082460;
       --footer-border: rgba(255,255,255,0.12);
       --footer-text: rgba(226,232,240,0.95);
@@ -82,17 +67,13 @@
       font-family: sans-serif;
     }
 
-    /* =========================================================
-       PAGE SECTION SHOW/HIDE
-       - Each “page” is a section. JS toggles .active.
-       ========================================================= */
+    /* PAGE SECTION SHOW/HIDE
+       - Each “page” is a section. JS toggles .active.*/
     .page-section { display: none; }
     .page-section.active { display: block; }
 
-    /* =========================================================
-       UNIVERSAL CARD
-       - Used all over the site for consistent look.
-       ========================================================= */
+    /* UNIVERSAL CARD
+       - Used all over the site for consistent look*/
     .ui-card{
       background: var(--card-bg);
       border: 1px solid var(--card-border-soft);
@@ -115,10 +96,8 @@
     .ui-muted{ color: var(--muted); }
     .ui-muted-2{ color: var(--muted-2); }
 
-    /* =========================================================
-       NAV ACTIVE STATE
-       - Highlights the active page button.
-       ========================================================= */
+    /* NAV ACTIVE STATE
+       - Highlights the active page button.*/
     .nav-btn{
       border: 1px solid transparent;
     }
@@ -631,9 +610,7 @@
 
   <!-- =========================================================
        NAVIGATION ISLAND
-       - Mobile: bottom center
-       - Desktop: top center
-       - Separate theme bubble added
+       - Mobile: bottom center & Desktop: top center
        ========================================================= -->
   <nav
     class="fixed left-1/2 -translate-x-1/2 bottom-6 md:bottom-auto md:top-6 z-50
@@ -722,12 +699,12 @@
         <button
           data-nav="contact"
           onclick="showPage('contact')"
-          class="nav-btn rounded-full px-3 py-2 flex items-center gap-2 hover:bg-blue-500/10 transition active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500/40"
+          class="nav-btn rounded-full px-3 py-2 flex items-center gap-2 hover:bg-blue-500/10 transition active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:o
+          <span class="block text-xl md:text-base" aria-hidden="true">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">utline-blue-500/40"
           aria-label="Contact Us"
           title="Contact Us"
         >
-          <span class="block text-xl md:text-base" aria-hidden="true">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.78.59 2.63a2 2 0 0 1-.45 2.11L8 9.91a16 16 0 0 0 6.09 6.09l1.45-1.2a2 2 0 0 1 2.11-.45c.85.27 1.73.47 2.63.59A2 2 0 0 1 22 16.92z"></path>
             </svg>
           </span>
@@ -896,7 +873,7 @@
           <div class="relative p-7" style="max-width:58%;">
             <svg class="w-8 h-8 mb-3 text-blue-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
             <h3 class="text-white font-extrabold text-sm uppercase tracking-widest mb-2">Variety of Materials</h3>
-            <p class="text-blue-100 text-sm leading-relaxed">We work across coatings, paper, textiles, threads, and specialty substrates—built to suit real product ranges.</p>
+            <p class="text-blue-100 text-sm leading-relaxed">We work across coatings, paper, textiles, threads, and specialty substrates—built to suit real and every product ranges.</p>
           </div>
         </div>
 
@@ -989,7 +966,7 @@
 
       <div class="mb-6">
         <h2 class="text-2xl font-bold mb-2">Capabilities Overview</h2>
-        <p class="ui-muted">Clean at first glance. Detailed on hover—so we can show more information without clutter.</p>
+        <p class="ui-muted">Simple at first glance. Hover on Services - so we can show more information.</p>
       </div>
 
       <div class="tech-grid">
@@ -1411,7 +1388,7 @@
               <li>Number of colors and variations</li>
               <li>Target industry (paint, textile, cosmetic, brand)</li>
               <li>Printing and finishing requirements</li>
-              <li>Quantity needed and delivery timeline</li>
+              <li>Minimum Order quantity 3000</li>
             </ul>
           </div>
         </div>
@@ -1426,7 +1403,7 @@
           <div class="ui-card p-6 rounded-3xl text-sm">
             <p class="mb-2"><strong>Location:</strong> Waterland Road, Saggian, Lahore, Pakistan</p>
             <p class="mb-2"><strong>Direct Line:</strong> +92 333 4294244</p>
-            <p><strong>Email:</strong> <a class="underline" href="mailto:colorfly@gmail.com">colorfly@gmail.com</a></p>
+            <p><strong>Email:</strong> <a class="underline" href="mailto:info@colorflypk.com">info@colorflypk.com</a></p>
           </div>
         </div>
       </div>
@@ -1435,7 +1412,7 @@
     <section id="privacy" class="page-section">
       <h1 class="text-4xl font-bold mb-3">Privacy Policy</h1>
       <p class="ui-muted mb-8 text-sm">
-        Last updated: 25-02-2026
+        Last updated: 15-03-2026
       </p>
 
       <div class="space-y-4">
@@ -1651,7 +1628,7 @@
       <div class="mt-8 pt-6 border-t border-white/10 text-xs text-center footer-muted">
         <p>© 2026 Colorfly Industrial. All rights reserved.</p>
         <p class="mt-2">Waterland Road, Saggian, Lahore, Pakistan</p>
-        <p class="mt-2">Email: <a class="underline" href="mailto:colorfly@gmail.com">colorfly@gmail.com</a></p>
+        <p class="mt-2">Email: <a class="underline" href="mailto:info@colorflypk.com">info@colorflypk.com</a></p>
         <p class="mt-2">Website developed by <a href="mailto:muhammad.umer2876@gmail.com" class="underline underline-offset-2 hover:opacity-100"><strong>XYZ Web Solutions</strong></a></p>
       </div>
     </div>
@@ -1706,7 +1683,7 @@
       const subject = encodeURIComponent("Inquiry from " + name);
       const body = encodeURIComponent(msg);
 
-      window.location.href = "mailto:colorfly@gmail.com?subject=" + subject + "&body=" + body;
+      window.location.href = "mailto:info@colorflypk.com?subject=" + subject + "&body=" + body;
     }
 
     let heroIndex = 0;
