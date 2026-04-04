@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Colorfly | Industrial Color Fidelity</title>
 
   <style>
-    /* #082460 the “dark theme” .
-    Dark mode is default via <html class="dark"> above.*/
     :root{
       /* Brand accent used across titles/highlights */
       --brand: #3b82f6;
@@ -16,8 +14,13 @@
       --card-bg: rgba(255,255,255,0.96);
       --card-border: rgba(15,23,42,0.12);
       --card-border-soft: rgba(15,23,42,0.08);
-      --card-shadow: 0 18px 55px rgba(0,0,0,0.08);
-      --card-shadow-hover: 0 28px 85px rgba(0,0,0,0.12);
+      --card-shadow: 0 18px 55px rgba(15,23,42,0.08);
+      --card-shadow-hover: 0 28px 85px rgba(15,23,42,0.12);
+
+      --page-bg: #ffffff;
+      --page-texture-a: rgba(59,130,246,0.04);
+      --page-texture-b: rgba(15,23,42,0.03);
+      --page-grid: rgba(15,23,42,0.035);
 
       --muted: rgba(15,23,42,0.72);
       --muted-2: rgba(15,23,42,0.56);
@@ -29,42 +32,36 @@
       --mosaic-muted: rgba(255,255,255,0.78);
 
       /* Footer (LIGHT) */
-      --footer-bg: #0b1220;
-      --footer-border: rgba(255,255,255,0.10);
-      --footer-text: rgba(226,232,240,0.92);
-      --footer-muted: rgba(226,232,240,0.70);
-      --footer-chip: rgba(255,255,255,0.06);
-    }
-
-    /* DARK THEME OVERRIDES #082460 */
-    .dark{
-      --card-bg: rgba(255,255,255,0.07);
-      --card-border: rgba(255,255,255,0.14);
-      --card-border-soft: rgba(255,255,255,0.10);
-      --card-shadow: 0 18px 55px rgba(0,0,0,0.55);
-      --card-shadow-hover: 0 28px 85px rgba(0,0,0,0.70);
-
-      --muted: rgba(241,245,249,0.82);
-      --muted-2: rgba(241,245,249,0.62);
-
-      /* Dark mosaic dark brand */
-      --mosaic-a: rgba(255,255,255,0.08);
-      --mosaic-b: rgba(255,255,255,0.06);
-
-      --mosaic-text: rgba(241,245,249,0.96);
-      --mosaic-muted: rgba(241,245,249,0.74);
-
-      /* Footer background  */
-      --footer-bg: #082460;
-      --footer-border: rgba(255,255,255,0.12);
-      --footer-text: rgba(226,232,240,0.95);
-      --footer-muted: rgba(226,232,240,0.72);
-      --footer-chip: rgba(255,255,255,0.08);
+      --footer-bg: #dbeafe;
+      --footer-border: rgba(59,130,246,0.18);
+      --footer-text: #1e3a8a;
+      --footer-muted: rgba(30,58,138,0.72);
+      --footer-chip: rgba(255,255,255,0.72);
     }
 
     html, body {
       margin: 0;
       font-family: sans-serif;
+      background:
+        radial-gradient(circle at top left, var(--page-texture-a), transparent 34%),
+        radial-gradient(circle at bottom right, var(--page-texture-b), transparent 28%),
+        linear-gradient(135deg, rgba(255,255,255,0.96), rgba(248,250,252,0.98));
+      background-color: var(--page-bg);
+      background-attachment: fixed;
+    }
+
+    body::before{
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(var(--page-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--page-grid) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.35;
+      mask-image: radial-gradient(circle at center, black 45%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 100%);
     }
 
     /* PAGE SECTION SHOW/HIDE
@@ -75,10 +72,11 @@
     /* UNIVERSAL CARD
        - Used all over the site for consistent look*/
     .ui-card{
-      background: var(--card-bg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,250,252,0.96));
       border: 1px solid var(--card-border-soft);
-      box-shadow: var(--card-shadow);
+      box-shadow: 0 14px 34px rgba(15,23,42,0.08), 0 2px 10px rgba(15,23,42,0.04);
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      backdrop-filter: blur(8px);
     }
     .ui-card:hover{
       transform: translateY(-4px);
@@ -104,10 +102,7 @@
     .nav-btn.nav-active{
       background: rgba(59,130,246,0.12);
       border-color: rgba(59,130,246,0.35);
-    }
-    .dark .nav-btn.nav-active{
-      background: rgba(255,255,255,0.14);
-      border-color: rgba(255,255,255,0.22);
+      box-shadow: 0 8px 20px rgba(59,130,246,0.12);
     }
 
     /* =========================================================
@@ -190,11 +185,6 @@
       border: 1px solid rgba(148,163,184,0.35);
       box-shadow: 0 26px 85px rgba(0,0,0,0.14);
     }
-    .dark .hero-wrap{
-      border-color: rgba(255,255,255,0.10);
-      box-shadow: 0 28px 90px rgba(0,0,0,0.55);
-    }
-
     .hero-slide{
       position: absolute;
       inset: 0;
@@ -276,20 +266,12 @@
       border: 1px solid rgba(148,163,184,0.25);
       transition: transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.35s ease, background 0.35s ease;
     }
-    .dark .tech-card {
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(255,255,255,0.10);
-    }
 
     .tech-card:hover {
       z-index: 2;
       transform: translateY(-6px);
       box-shadow: 0 22px 55px rgba(0,0,0,0.14);
       background: rgba(255,255,255,1);
-    }
-    .dark .tech-card:hover {
-      box-shadow: 0 22px 55px rgba(0,0,0,0.65);
-      background: rgba(255,255,255,0.10);
     }
 
     .tech-media {
@@ -337,11 +319,6 @@
       padding: 6px 10px;
       border-radius: 999px;
     }
-    .dark .tech-badge {
-      background: rgba(255,255,255,0.10);
-      color: rgba(241,245,249,0.94);
-      border-color: rgba(255,255,255,0.12);
-    }
 
     .tech-body { padding: 22px 22px 18px 22px; }
 
@@ -370,7 +347,6 @@
       transform: translateY(10px);
       transition: opacity 0.25s ease, transform 0.25s ease;
     }
-    .dark .tech-specs { border-top-color: rgba(255,255,255,0.10); }
 
     .tech-card:hover .tech-specs {
       opacity: 1;
@@ -388,7 +364,6 @@
       border-bottom: 1px solid rgba(148,163,184,0.18);
       opacity: 0.85;
     }
-    .dark .tech-specs li { border-bottom-color: rgba(255,255,255,0.08); }
     .tech-specs li span { opacity: 0.8; }
     .tech-specs li strong { font-weight: 800; color: var(--brand); }
 
@@ -408,11 +383,6 @@
       background: rgba(255,255,255,0.7);
       box-shadow: 0 12px 30px rgba(0,0,0,0.06);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .dark .gallery-card {
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(255,255,255,0.10);
-      box-shadow: 0 18px 45px rgba(0,0,0,0.5);
     }
 
     .gallery-card:hover {
@@ -476,11 +446,6 @@
       background: rgba(255,255,255,0.06);
       box-shadow: 0 18px 55px rgba(0,0,0,0.14);
     }
-    .dark .clients-wrap{
-      border-color: rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.06);
-      box-shadow: 0 22px 70px rgba(0,0,0,0.55);
-    }
 
     .clients-header{
       display:flex;
@@ -528,11 +493,6 @@
       font-size: 12px;
       white-space: nowrap;
     }
-    .dark .client-pill{
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.08);
-      color: rgba(241,245,249,0.95);
-    }
 
     .client-dot{
       width: 10px;
@@ -563,7 +523,7 @@
     .site-footer a{
       color: var(--footer-text);
       text-decoration: none;
-      opacity: 0.85;
+      opacity: 0.95;
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
     .site-footer a:hover{
@@ -595,21 +555,17 @@
         padding-bottom: 32px;
       }
     }
-  
-      .dark #footer-logo .cls-2 { fill: #ffffff !important; }
-      .dark #footer-logo .cls-9 { fill: #ffffff !important; }
   </style>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: { extend: { colors: { brand: { accent: '#3b82f6' } } } }
     }
   </script>
 </head>
 
-<body class="bg-white text-slate-900 dark:bg-[#082460] dark:text-gray-100">
+<body class="bg-white text-slate-900">
 
   <!-- =========================================================
        NAVIGATION ISLAND
@@ -623,8 +579,8 @@
     <div class="flex items-center justify-center gap-3">
       <!-- Main navigation island -->
       <div
-        class="flex-1 md:flex-none bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl
-               border border-slate-200 dark:border-white/10 shadow-2xl rounded-full
+        class="flex-1 md:flex-none bg-white/90 backdrop-blur-xl
+               border border-slate-200 shadow-2xl rounded-full
                px-4 py-2 flex items-center justify-between gap-4"
       >
         <!-- Home button -->
@@ -714,38 +670,10 @@
           <span class="hidden md:inline text-sm font-bold">Contact Us</span>
         </button>
       </div>
-
-      <!-- Separate theme button -->
-      <button
-        onclick="toggleTheme()"
-        class="shrink-0 w-14 h-14 rounded-full bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl
-               border border-slate-200 dark:border-white/10 shadow-2xl
-               flex items-center justify-center hover:bg-blue-500/10 transition
-               active:scale-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500/40"
-        aria-label="Toggle theme"
-        title="Toggle theme"
-      >
-        <svg class="w-6 h-6 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
-        </svg>
-        <svg class="w-6 h-6 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="4"></circle>
-          <path d="M12 2v2"></path>
-          <path d="M12 20v2"></path>
-          <path d="M2 12h2"></path>
-          <path d="M20 12h2"></path>
-          <path d="M4.9 4.9l1.4 1.4"></path>
-          <path d="M17.7 17.7l1.4 1.4"></path>
-          <path d="M19.1 4.9l-1.4 1.4"></path>
-          <path d="M6.3 17.7l-1.4 1.4"></path>
-        </svg>
-      </button>
     </div>
   </nav>
 
-  <main class="max-w-5xl mx-auto px-6 pt-10 sm:pt-12 md:pt-32 pb-36 sm:pb-40">
+  <main class="max-w-5xl mx-auto px-6 pt-10 sm:pt-12 md:pt-32 pb-36 sm:pb-40 relative">
 
     <section id="home" class="page-section active">
       <div class="text-center mb-10">
@@ -806,7 +734,7 @@
       <div class="mb-16">
         <h2 class="text-3xl font-bold mb-6">What We Manufacture</h2>
         <div class="grid lg:grid-cols-2 gap-6">
-          <div class="relative rounded-3xl overflow-hidden border border-slate-200/70 dark:border-white/10 shadow-xl">
+          <div class="relative rounded-3xl overflow-hidden border border-slate-200/70 shadow-xl">
             <img
               src="images/svc-shade-card.jpeg"
               alt="Shade cards and color swatches"
@@ -823,7 +751,7 @@
             </div>
           </div>
 
-          <div class="relative rounded-3xl overflow-hidden border border-slate-200/70 dark:border-white/10 shadow-xl">
+          <div class="relative rounded-3xl overflow-hidden border border-slate-200/70 shadow-xl">
             <img
               src="images/svc-fan-deck.jpeg"
               alt="Fan deck color palette"
@@ -953,6 +881,108 @@
                 <h3 class="font-bold text-blue-200">04. Finish</h3>
                 <p class="text-sm ui-muted-2 mt-1">Lamination, spot UV, foil, embossing, and packaging.</p>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+
+      <div class="mb-14">
+        <div class="clients-wrap">
+          <div class="clients-header">
+            <div>
+              <h3 class="text-2xl font-bold">Clients We’ve Worked With</h3>
+              <p class="ui-muted mt-1 text-sm max-w-2xl">
+                A few brands we’ve supported with shade cards, fan decks, sampling formats, and premium finishing.
+              </p>
+            </div>
+          </div>
+
+          <div class="clients-marquee" aria-label="Clients carousel">
+            <div class="clients-track" id="clientsTrack">
+              <div class="client-pill"><span class="client-dot"></span>Mobi Paints</div>
+              <div class="client-pill"><span class="client-dot"></span>Alfa Paints</div>
+              <div class="client-pill"><span class="client-dot"></span>Jawa Paints</div>
+              <div class="client-pill"><span class="client-dot"></span>Genesis Powder Coating</div>
+              <div class="client-pill"><span class="client-dot"></span>Vital Paints</div>
+              <div class="client-pill"><span class="client-dot"></span>Sunrise Paints</div>
+
+              <div class="client-pill"><span class="client-dot"></span>Mobi Paints</div>
+              <div class="client-pill"><span class="client-dot"></span>Alfa Paints</div>
+              <div class="client-pill"><span class="client-dot"></span>Jawa Paints</div>
+              <div class="client-pill"><span class="client-dot"></span>Genesis Powder Coating</div>
+              <div class="client-pill"><span class="client-dot"></span>Vital Paints</div>
+              <div class="client-pill"><span class="client-dot"></span>Sunrise Paints</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="mt-14">
+        <h2 class="text-3xl font-bold mb-2">Past Work</h2>
+        <p class="ui-muted mb-6 max-w-3xl">
+          A few example projects. When you provide real photos later, we will replace these placeholders professionally.
+        </p>
+
+        <div class="gallery-grid" id="pastWorkGrid">
+          <div class="gallery-card">
+            <div class="gallery-media">
+              <img loading="lazy" decoding="async" src="images/work-mobi.jpeg" alt="Mobi Paints — WeatherSafe shade card and catalog">
+            </div>
+            <div class="gallery-body">
+              <h3 class="gallery-title">Mobi Paints — WeatherSafe</h3>
+              <p class="gallery-desc">Premium shade card and catalog design with full printing and finishing for Mobi Paints' WeatherSafe range.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card">
+            <div class="gallery-media">
+              <img loading="lazy" decoding="async" src="images/work-robitec.jpeg" alt="Robitec by Alfa — Super Gloss Enamel shade card">
+            </div>
+            <div class="gallery-body">
+              <h3 class="gallery-title">Robitec by Alfa — Super Gloss Enamel</h3>
+              <p class="gallery-desc">Shade card and catalog for Robitec by Alfa, covering Super Gloss Enamel and Synthetic Metallic Finish ranges.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card">
+            <div class="gallery-media">
+              <img loading="lazy" decoding="async" src="images/work-boja.jpeg" alt="Boja Paints — Silk Emulsion shade card">
+            </div>
+            <div class="gallery-body">
+              <h3 class="gallery-title">Boja Paints — Silk Emulsion</h3>
+              <p class="gallery-desc">Color shade card and catalog for Boja Paints' Silk Emulsion interior range for walls and ceilings.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card">
+            <div class="gallery-media">
+              <img loading="lazy" decoding="async" src="images/work-rozzi.jpeg" alt="Rozzi Lac — High-Gloss Synthetic Enamel shade card">
+            </div>
+            <div class="gallery-body">
+              <h3 class="gallery-title">Rozzi Lac — Synthetic Enamel</h3>
+              <p class="gallery-desc">Comprehensive shade card for Rozzi Lac's High-Gloss Synthetic Enamel range for wood and metal.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card" style="display:flex;flex-direction:column;">
+            <div class="gallery-media" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#082460,#1f6fbf);">
+              <div style="text-align:center;padding:24px;">
+                <svg style="width:48px;height:48px;margin:0 auto 12px;display:block;color:rgba(255,255,255,0.5);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 8v4"></path>
+                  <path d="M12 16h.01"></path>
+                </svg>
+                <div style="font-size:22px;font-weight:900;color:rgba(255,255,255,0.9);letter-spacing:0.04em;">Coming Soon</div>
+                <div style="font-size:13px;color:rgba(255,255,255,0.6);margin-top:6px;">More work on the way</div>
+              </div>
+            </div>
+            <div class="gallery-body">
+              <h3 class="gallery-title">New Project</h3>
+              <p class="gallery-desc">More exciting work is coming. Check back soon for the latest additions to our portfolio.</p>
             </div>
           </div>
         </div>
@@ -1145,7 +1175,7 @@
           </div>
         </div>
 
-        <div class="relative rounded-3xl overflow-hidden border border-slate-200/70 dark:border-white/10 shadow-2xl">
+        <div class="relative rounded-3xl overflow-hidden border border-slate-200/70 shadow-2xl">
           <img
             src="images/about-team.jpeg"
             alt="Team reviewing color samples and shade cards"
@@ -1204,36 +1234,7 @@
         </div>
       </div>
 
-      <div class="mb-14">
-        <div class="clients-wrap">
-          <div class="clients-header">
-            <div>
-              <h3 class="text-2xl font-bold">Clients We’ve Worked With</h3>
-              <p class="ui-muted mt-1 text-sm max-w-2xl">
-                A few brands we’ve supported with shade cards, fan decks, sampling formats, and premium finishing.
-              </p>
-            </div>
-          </div>
-
-          <div class="clients-marquee" aria-label="Clients carousel">
-            <div class="clients-track" id="clientsTrack">
-              <div class="client-pill"><span class="client-dot"></span>Mobi Paints</div>
-              <div class="client-pill"><span class="client-dot"></span>Alfa Paints</div>
-              <div class="client-pill"><span class="client-dot"></span>Jawa Paints</div>
-              <div class="client-pill"><span class="client-dot"></span>Genesis Powder Coating</div>
-              <div class="client-pill"><span class="client-dot"></span>Vital Paints</div>
-              <div class="client-pill"><span class="client-dot"></span>Sunrise Paints</div>
-
-              <div class="client-pill"><span class="client-dot"></span>Mobi Paints</div>
-              <div class="client-pill"><span class="client-dot"></span>Alfa Paints</div>
-              <div class="client-pill"><span class="client-dot"></span>Jawa Paints</div>
-              <div class="client-pill"><span class="client-dot"></span>Genesis Powder Coating</div>
-              <div class="client-pill"><span class="client-dot"></span>Vital Paints</div>
-              <div class="client-pill"><span class="client-dot"></span>Sunrise Paints</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="grid md:grid-cols-3 gap-6 mb-14">
 
       <div class="grid md:grid-cols-3 gap-6 mb-14">
         <div class="ui-card p-7 rounded-3xl">
@@ -1287,73 +1288,9 @@
           <p class="text-sm ui-muted-2">Matte/gloss lamination, spot UV, foil stamping, and embossing.</p>
         </div>
       </div>
+    </section>
 
-      <div class="mt-14">
-        <h2 class="text-3xl font-bold mb-2">Past Work</h2>
-        <p class="ui-muted mb-6 max-w-3xl">
-          A few example projects. A visual testimonial to present what we have delivered to our customers.
-        </p>
-
-        <div class="gallery-grid" id="pastWorkGrid">
-          <div class="gallery-card">
-            <div class="gallery-media">
-              <img loading="lazy" decoding="async" src="images/work-mobi.jpeg" alt="Mobi Paints — WeatherSafe shade card and catalog">
-            </div>
-            <div class="gallery-body">
-              <h3 class="gallery-title">Mobi Paints — WeatherSafe</h3>
-              <p class="gallery-desc">Premium shade card and catalog design with full printing and finishing for Mobi Paints' WeatherSafe range.</p>
-            </div>
-          </div>
-
-          <div class="gallery-card">
-            <div class="gallery-media">
-              <img loading="lazy" decoding="async" src="images/work-robitec.jpeg" alt="Robitec by Alfa — Super Gloss Enamel shade card">
-            </div>
-            <div class="gallery-body">
-              <h3 class="gallery-title">Robitec by Alfa — Super Gloss Enamel</h3>
-              <p class="gallery-desc">Shade card and catalog for Robitec by Alfa, covering Super Gloss Enamel and Synthetic Metallic Finish ranges.</p>
-            </div>
-          </div>
-
-          <div class="gallery-card">
-            <div class="gallery-media">
-              <img loading="lazy" decoding="async" src="images/work-boja.jpeg" alt="Boja Paints — Silk Emulsion shade card">
-            </div>
-            <div class="gallery-body">
-              <h3 class="gallery-title">Boja Paints — Silk Emulsion</h3>
-              <p class="gallery-desc">Color shade card and catalog for Boja Paints' Silk Emulsion interior range for walls and ceilings.</p>
-            </div>
-          </div>
-
-          <div class="gallery-card">
-            <div class="gallery-media">
-              <img loading="lazy" decoding="async" src="images/work-rozzi.jpeg" alt="Rozzi Lac — High-Gloss Synthetic Enamel shade card">
-            </div>
-            <div class="gallery-body">
-              <h3 class="gallery-title">Rozzi Lac — Synthetic Enamel</h3>
-              <p class="gallery-desc">Comprehensive shade card for Rozzi Lac's High-Gloss Synthetic Enamel range for wood and metal.</p>
-            </div>
-          </div>
-
-          <div class="gallery-card" style="display:flex;flex-direction:column;">
-            <div class="gallery-media" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#082460,#1f6fbf);">
-              <div style="text-align:center;padding:24px;">
-                <svg style="width:48px;height:48px;margin:0 auto 12px;display:block;color:rgba(255,255,255,0.5);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M12 8v4"></path>
-                  <path d="M12 16h.01"></path>
-                </svg>
-                <div style="font-size:22px;font-weight:900;color:rgba(255,255,255,0.9);letter-spacing:0.04em;">Coming Soon</div>
-                <div style="font-size:13px;color:rgba(255,255,255,0.6);margin-top:6px;">More work on the way</div>
-              </div>
-            </div>
-            <div class="gallery-body">
-              <h3 class="gallery-title">New Project</h3>
-              <p class="gallery-desc">More exciting work is coming. Check back soon for the latest additions to our portfolio.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+    <section id="contact"
     </section>
 
     <section id="contact" class="page-section">
@@ -1366,9 +1303,9 @@
 
           <div class="space-y-4 mb-6">
             <input type="text" id="contact_name" placeholder="Company Name"
-                   class="w-full p-4 rounded-2xl bg-white dark:bg-white/5 border border-slate-300/60 dark:border-white/10 outline-none text-inherit">
+                   class="w-full p-4 rounded-2xl bg-white border border-slate-300/60 shadow-sm outline-none text-inherit">
             <textarea id="contact_msg" rows="4" placeholder="Describe your project..."
-                      class="w-full p-4 rounded-2xl bg-white dark:bg-white/5 border border-slate-300/60 dark:border-white/10 outline-none text-inherit"></textarea>
+                      class="w-full p-4 rounded-2xl bg-white border border-slate-300/60 shadow-sm outline-none text-inherit"></textarea>
             <button onclick="triggerEmail()"
                     class="w-full bg-blue-600 text-white font-bold py-4 rounded-2xl hover:bg-blue-700 transition-colors">
               Send Email Inquiry
@@ -1397,7 +1334,7 @@
         </div>
 
         <div class="space-y-6">
-          <div class="h-64 rounded-3xl overflow-hidden border border-slate-200/70 dark:border-white/10 shadow-md">
+          <div class="h-64 rounded-3xl overflow-hidden border border-slate-200/70 shadow-md">
             <iframe width="100%" height="100%" frameborder="0" loading="lazy"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13596.123456789!2d74.2678!3d31.5834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDM1JzAwLjAiTiA3NMKwMTYnMDQuOCJF!5e0!3m2!1sen!2s!4v1700000000000">
             </iframe>
@@ -1485,7 +1422,7 @@
     </section>
   </main>
 
-  <footer class="site-footer footer-safe">
+  <footer class="site-footer footer-safe" style="box-shadow: 0 -12px 32px rgba(96,165,250,0.12);">
     <div class="max-w-6xl mx-auto px-6 pt-10">
       <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
         <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-sm">
@@ -1493,7 +1430,7 @@
         </div>
 
         <div class="text-center flex flex-col items-center gap-1">
-          <svg class="w-48 h-auto" aria-label="Colorfly logo" focusable="false" id="footer-logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="40 330 1000 430"><defs><style>.cls-1{fill:none;}.cls-2{fill:#172b75;}.cls-3{clip-path:url(#clip-path);}.cls-4{fill:url(#linear-gradient);}.cls-5{clip-path:url(#clip-path-2);}.cls-6{fill:url(#linear-gradient-2);}.cls-7{clip-path:url(#clip-path-3);}.cls-8{fill:url(#linear-gradient-3);}.cls-9{fill:#231f20;}</style><clipPath id="clip-path"><path id="SVGID" class="cls-1" d="M458.2,370.78c1.3,10.19,6.45,18.07,14.18,24.28,11.95,9.58,25.22,16.83,38.1,24.76,24.16,14.87,49.21,28.17,70.65,47.65,8.7,7.91,16.55,16.31,22.13,26.89q10.61,20.11.64,40.7c-.94,1.92-1.78,3.9-2.62,5.87-.08.19.24.55.37.83,30.93-25.61,34.84-63,9.85-94.35C595.11,426.85,574.4,411.86,553,398c-18.59-12-37.61-23.25-56.51-34.69a301.17,301.17,0,0,1-38.09-26.63c-.75,12.3-1.52,23.18-.15,34.06"/></clipPath><linearGradient id="linear-gradient" x1="407.37" y1="612.54" x2="420.69" y2="612.54" gradientTransform="translate(-7359.68 5779.14) rotate(-90) scale(12.91)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0057a7"/><stop offset="0.75" stop-color="#74c27e"/><stop offset="1" stop-color="#74c27e"/></linearGradient><clipPath id="clip-path-2"><path id="SVGID-2" data-name="SVGID" class="cls-1" d="M503.63,472.88a268.79,268.79,0,0,1,47.16,30.53,52.87,52.87,0,0,1,14,17.08c9.31,18.19,2.45,38.1-15.4,43.8s-10.75,13.14,17.19,2c2.58-1,5.15-2.17,7.72-3.46,29.88-15,30.12-54.81,10.91-75.45-22.17-23.84-48.74-41.15-77.57-54.92a270.61,270.61,0,0,1-40.45-24.24c-4.24,31.69,5.69,48.92,36.46,64.62"/></clipPath><linearGradient id="linear-gradient-2" x1="408.13" y1="609.15" x2="421.46" y2="609.15" gradientTransform="translate(-5562.15 4642.11) rotate(-90) scale(10.01)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#663d97"/><stop offset="0.23" stop-color="#663d97"/><stop offset="0.54" stop-color="#bf4297"/><stop offset="1" stop-color="#bf4297"/></linearGradient><clipPath id="clip-path-3"><path id="SVGID-3" data-name="SVGID" class="cls-1" d="M623,373.77c-14.55,8.64-27.16,20.75-44.47,26.68,25.83,20.79,51.43,40.61,61,76,1.12-44.72,21.76-70.45,65.35-74.18-.44-.91-.88-1.8-1.3-2.7-4.76-1.66-9.52-3.29-14.26-5a33.4,33.4,0,0,1-15.07-11.3c-9.13-11.59-18-17.21-28.13-17.21-7,0-14.49,2.63-23.14,7.76"/></clipPath><linearGradient id="linear-gradient-3" x1="397.56" y1="616.4" x2="410.89" y2="616.4" gradientTransform="translate(-5204.19 4254.6) rotate(-90) scale(9.48)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ec2224"/><stop offset="1" stop-color="#f5ea16"/></linearGradient></defs><path class="cls-2" d="M232.2,625.42c-12.68,36.89-42.5,60.86-92.2,60.86-55,0-81.23-33-81.23-80.18,0-56.49,38.18-111.38,105.82-111.38,47.51,0,75.58,26.08,78.18,63.85h-3.1c-17.46,0-33.62-8.18-45-21.44-6.5-7.57-17-13.26-33.25-13.26-43,0-63.52,42.39-63.52,80.7,0,29.4,12.26,52.57,45.65,52.57,16.31,0,28.32-4.72,37.62-14.11,10.87-11,25.37-17.61,40.82-17.61Z"/><path class="cls-2" d="M388.69,606.61c0,40-25.73,79.22-82,79.41-43.7.19-64.87-27.84-64.87-60.54,0-43,29.3-80.29,81.73-80.29,42.2,0,65.16,26.89,65.16,61.42M277.55,623.79c0,20.83,11.7,34.71,31.49,34.71,29.69,0,43.16-26.21,43.16-52.3,0-19.22-9.9-33.85-31.84-33.85-26.87,0-42.81,24.41-42.81,51.44"/><path class="cls-2" d="M388.69,682.38l33.85-160.13a43.1,43.1,0,0,1,42.17-34.18L423.63,682.38Z"/><path class="cls-2" d="M618.86,588.17q.72-3.43,1.46-6.92a41,41,0,0,1,40.06-32.42c-.44,4.84-2.38,17.27-4.6,27.33,12.09-21.66,28.82-30.3,52.16-30.11l-8.3,34.52c-28.36-.13-47.29,14.56-55.49,54.45l-9.86,47.36H599Z"/><path class="cls-2" d="M715.58,682.38l21-100.65H713.69L721.06,546H744l2.93-11.47c6.2-29.64,21-48.4,53.45-48.4a89.31,89.31,0,0,1,19.58,2.05l-6.23,26.53a54.54,54.54,0,0,0-10-1.06c-13.15.08-17.91,6.71-21.14,21L779.47,546h28c-3.27,15.22-18.49,35.69-34,35.69H772.1l-21,100.65Z"/><path class="cls-2" d="M794.44,682.38l33.84-160.13a43.12,43.12,0,0,1,42.18-34.18L829.38,682.38Z"/><path class="cls-2" d="M863.51,548.83a43.67,43.67,0,0,1,42.93,35.76c6.65,36.08,10.38,60.36,11.67,71.38h.63c5.55-10.74,18.77-35.75,39-73.53a63.61,63.61,0,0,1,56.07-33.61L941,675.19c-31.06,54.53-41.55,68.09-78.46,68.09h-.18a19.32,19.32,0,0,1-18.79-23.56l1.84-8.18A92.76,92.76,0,0,0,862,713c14.84,0,22.79-6.72,32.45-22.73Z"/><g class="cls-3"><rect class="cls-4" x="443.07" y="348.19" width="207.17" height="182.09" transform="translate(100.93 980.62) rotate(-89.32)"/></g><path class="cls-2" d="M569.29,573.22c-2.89,1.15-5.65,2.14-8.26,3a6.39,6.39,0,0,0-3.53,9.38c3.49,5.63,5.18,12.74,5.18,20.61,0,26.09-13.47,52.31-43.17,52.31-19.79,0-31.48-13.89-31.48-34.72,0-21.07,10-39.88,26.71-48.12,3.88-1.92,8.62-2.77,14.07-6,5.72-3.41,16.56-10.29,23.47-15.51a4.16,4.16,0,0,0-1.64-7.4A86.48,86.48,0,0,0,534,545.19c-52.44,0-81.73,37.34-81.73,80.28,0,32.71,21.17,60.73,64.87,60.56,56.27-.19,82-39.42,82-79.41,0-12.87-3.19-24.68-9.38-34.44a8.72,8.72,0,0,0-11.45-3.06l-.72.36c-2.73,1.39-5.53,2.64-8.32,3.74"/><g class="cls-5"><rect class="cls-6" x="448.24" y="421.11" width="170.85" height="143.47" transform="translate(34.48 1020.59) rotate(-89.32)"/></g><g class="cls-7"><rect class="cls-8" x="585.74" y="357.37" width="111.9" height="127.68" transform="translate(212.86 1057.83) rotate(-89.32)"/></g><path class="cls-9" d="M994,479.94a27.2,27.2,0,1,0,27.2,27.21A27.2,27.2,0,0,0,994,479.94m0,49.95a22.75,22.75,0,1,1,22.75-22.74A22.74,22.74,0,0,1,994,529.89"/><path class="cls-9" d="M988.52,510.11v9.95h-6.21V494.22h14.07c6,0,9.38,2.95,9.38,7.38a6.06,6.06,0,0,1-4.5,6.12c1,.41,3.84,1.43,3.84,6.08v1.28a20.91,20.91,0,0,0,.32,5H999c-.43-1.13-.48-2.66-.48-5.4v-.85c0-2.61-1-3.7-4.73-3.7Zm0-4.71H995c3,0,4.37-1.09,4.37-3.28,0-2-1.36-3.19-4.32-3.19h-6.51Z"/><path class="cls-2" d="M232.2,625.42c-12.68,36.89-42.5,60.86-92.2,60.86-55,0-81.23-33-81.23-80.18,0-56.49,38.18-111.38,105.82-111.38,47.51,0,75.58,26.08,78.18,63.85h-3.1c-17.46,0-33.62-8.18-45-21.44-6.5-7.57-17-13.26-33.25-13.26-43,0-63.52,42.39-63.52,80.7,0,29.4,12.26,52.57,45.65,52.57,16.31,0,28.32-4.72,37.62-14.11,10.87-11,25.37-17.61,40.82-17.61Z"/><path class="cls-2" d="M388.69,606.61c0,40-25.73,79.22-82,79.41-43.7.19-64.87-27.84-64.87-60.54,0-43,29.3-80.29,81.73-80.29,42.2,0,65.16,26.89,65.16,61.42M277.55,623.79c0,20.83,11.7,34.71,31.49,34.71,29.69,0,43.16-26.21,43.16-52.3,0-19.22-9.9-33.85-31.84-33.85-26.87,0-42.81,24.41-42.81,51.44"/><path class="cls-2" d="M388.69,682.38l33.85-160.13a43.1,43.1,0,0,1,42.17-34.18L423.63,682.38Z"/><path class="cls-2" d="M618.86,588.17q.72-3.43,1.46-6.92a41,41,0,0,1,40.06-32.42c-.44,4.84-2.38,17.27-4.6,27.33,12.09-21.66,28.82-30.3,52.16-30.11l-8.3,34.52c-28.36-.13-47.29,14.56-55.49,54.45l-9.86,47.36H599Z"/><path class="cls-2" d="M715.58,682.38l21-100.65H713.69L721.06,546H744l2.93-11.47c6.2-29.64,21-48.4,53.45-48.4a89.31,89.31,0,0,1,19.58,2.05l-6.23,26.53a54.54,54.54,0,0,0-10-1.06c-13.15.08-17.91,6.71-21.14,21L779.47,546h28c-3.27,15.22-18.49,35.69-34,35.69H772.1l-21,100.65Z"/><path class="cls-2" d="M794.44,682.38l33.84-160.13a43.12,43.12,0,0,1,42.18-34.18L829.38,682.38Z"/><path class="cls-2" d="M863.51,548.83a43.67,43.67,0,0,1,42.93,35.76c6.65,36.08,10.38,60.36,11.67,71.38h.63c5.55-10.74,18.77-35.75,39-73.53a63.61,63.61,0,0,1,56.07-33.61L941,675.19c-31.06,54.53-41.55,68.09-78.46,68.09h-.18a19.32,19.32,0,0,1-18.79-23.56l1.84-8.18A92.76,92.76,0,0,0,862,713c14.84,0,22.79-6.72,32.45-22.73Z"/><g class="cls-3"><rect class="cls-4" x="443.07" y="348.19" width="207.17" height="182.09" transform="translate(100.93 980.62) rotate(-89.32)"/></g><path class="cls-2" d="M569.29,573.22c-2.89,1.15-5.65,2.14-8.26,3a6.39,6.39,0,0,0-3.53,9.38c3.49,5.63,5.18,12.74,5.18,20.61,0,26.09-13.47,52.31-43.17,52.31-19.79,0-31.48-13.89-31.48-34.72,0-21.07,10-39.88,26.71-48.12,3.88-1.92,8.62-2.77,14.07-6,5.72-3.41,16.56-10.29,23.47-15.51a4.16,4.16,0,0,0-1.64-7.4A86.48,86.48,0,0,0,534,545.19c-52.44,0-81.73,37.34-81.73,80.28,0,32.71,21.17,60.73,64.87,60.56,56.27-.19,82-39.42,82-79.41,0-12.87-3.19-24.68-9.38-34.44a8.72,8.72,0,0,0-11.45-3.06l-.72.36c-2.73,1.39-5.53,2.64-8.32,3.74"/><g class="cls-5"><rect class="cls-6" x="448.24" y="421.11" width="170.85" height="143.47" transform="translate(34.48 1020.59) rotate(-89.32)"/></g><g class="cls-7"><rect class="cls-8" x="585.74" y="357.37" width="111.9" height="127.68" transform="translate(212.86 1057.83) rotate(-89.32)"/></g><path class="cls-9" d="M994,479.94a27.2,27.2,0,1,0,27.2,27.21A27.2,27.2,0,0,0,994,479.94m0,49.95a22.75,22.75,0,1,1,22.75-22.74A22.74,22.74,0,0,1,994,529.89"/><path class="cls-9" d="M988.52,510.11v9.95h-6.21V494.22h14.07c6,0,9.38,2.95,9.38,7.38a6.06,6.06,0,0,1-4.5,6.12c1,.41,3.84,1.43,3.84,6.08v1.28a20.91,20.91,0,0,0,.32,5H999c-.43-1.13-.48-2.66-.48-5.4v-.85c0-2.61-1-3.7-4.73-3.7Zm0-4.71H995c3,0,4.37-1.09,4.37-3.28,0-2-1.36-3.19-4.32-3.19h-6.51Z"/></svg>
+          <svg class="w-48 h-auto" aria-label="Colorfly logo" focusable="false" id="footer-logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="40 330 1000 430"><defs><style>.cls-1{fill:none;}.cls-2{fill:#1e3a8a;}.cls-3{clip-path:url(#clip-path);}.cls-4{fill:url(#linear-gradient);}.cls-5{clip-path:url(#clip-path-2);}.cls-6{fill:url(#linear-gradient-2);}.cls-7{clip-path:url(#clip-path-3);}.cls-8{fill:url(#linear-gradient-3);}.cls-9{fill:#1e40af;}</style><clipPath id="clip-path"><path id="SVGID" class="cls-1" d="M458.2,370.78c1.3,10.19,6.45,18.07,14.18,24.28,11.95,9.58,25.22,16.83,38.1,24.76,24.16,14.87,49.21,28.17,70.65,47.65,8.7,7.91,16.55,16.31,22.13,26.89q10.61,20.11.64,40.7c-.94,1.92-1.78,3.9-2.62,5.87-.08.19.24.55.37.83,30.93-25.61,34.84-63,9.85-94.35C595.11,426.85,574.4,411.86,553,398c-18.59-12-37.61-23.25-56.51-34.69a301.17,301.17,0,0,1-38.09-26.63c-.75,12.3-1.52,23.18-.15,34.06"/></clipPath><linearGradient id="linear-gradient" x1="407.37" y1="612.54" x2="420.69" y2="612.54" gradientTransform="translate(-7359.68 5779.14) rotate(-90) scale(12.91)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0057a7"/><stop offset="0.75" stop-color="#74c27e"/><stop offset="1" stop-color="#74c27e"/></linearGradient><clipPath id="clip-path-2"><path id="SVGID-2" data-name="SVGID" class="cls-1" d="M503.63,472.88a268.79,268.79,0,0,1,47.16,30.53,52.87,52.87,0,0,1,14,17.08c9.31,18.19,2.45,38.1-15.4,43.8s-10.75,13.14,17.19,2c2.58-1,5.15-2.17,7.72-3.46,29.88-15,30.12-54.81,10.91-75.45-22.17-23.84-48.74-41.15-77.57-54.92a270.61,270.61,0,0,1-40.45-24.24c-4.24,31.69,5.69,48.92,36.46,64.62"/></clipPath><linearGradient id="linear-gradient-2" x1="408.13" y1="609.15" x2="421.46" y2="609.15" gradientTransform="translate(-5562.15 4642.11) rotate(-90) scale(10.01)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#663d97"/><stop offset="0.23" stop-color="#663d97"/><stop offset="0.54" stop-color="#bf4297"/><stop offset="1" stop-color="#bf4297"/></linearGradient><clipPath id="clip-path-3"><path id="SVGID-3" data-name="SVGID" class="cls-1" d="M623,373.77c-14.55,8.64-27.16,20.75-44.47,26.68,25.83,20.79,51.43,40.61,61,76,1.12-44.72,21.76-70.45,65.35-74.18-.44-.91-.88-1.8-1.3-2.7-4.76-1.66-9.52-3.29-14.26-5a33.4,33.4,0,0,1-15.07-11.3c-9.13-11.59-18-17.21-28.13-17.21-7,0-14.49,2.63-23.14,7.76"/></clipPath><linearGradient id="linear-gradient-3" x1="397.56" y1="616.4" x2="410.89" y2="616.4" gradientTransform="translate(-5204.19 4254.6) rotate(-90) scale(9.48)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ec2224"/><stop offset="1" stop-color="#f5ea16"/></linearGradient></defs><path class="cls-2" d="M232.2,625.42c-12.68,36.89-42.5,60.86-92.2,60.86-55,0-81.23-33-81.23-80.18,0-56.49,38.18-111.38,105.82-111.38,47.51,0,75.58,26.08,78.18,63.85h-3.1c-17.46,0-33.62-8.18-45-21.44-6.5-7.57-17-13.26-33.25-13.26-43,0-63.52,42.39-63.52,80.7,0,29.4,12.26,52.57,45.65,52.57,16.31,0,28.32-4.72,37.62-14.11,10.87-11,25.37-17.61,40.82-17.61Z"/><path class="cls-2" d="M388.69,606.61c0,40-25.73,79.22-82,79.41-43.7.19-64.87-27.84-64.87-60.54,0-43,29.3-80.29,81.73-80.29,42.2,0,65.16,26.89,65.16,61.42M277.55,623.79c0,20.83,11.7,34.71,31.49,34.71,29.69,0,43.16-26.21,43.16-52.3,0-19.22-9.9-33.85-31.84-33.85-26.87,0-42.81,24.41-42.81,51.44"/><path class="cls-2" d="M388.69,682.38l33.85-160.13a43.1,43.1,0,0,1,42.17-34.18L423.63,682.38Z"/><path class="cls-2" d="M618.86,588.17q.72-3.43,1.46-6.92a41,41,0,0,1,40.06-32.42c-.44,4.84-2.38,17.27-4.6,27.33,12.09-21.66,28.82-30.3,52.16-30.11l-8.3,34.52c-28.36-.13-47.29,14.56-55.49,54.45l-9.86,47.36H599Z"/><path class="cls-2" d="M715.58,682.38l21-100.65H713.69L721.06,546H744l2.93-11.47c6.2-29.64,21-48.4,53.45-48.4a89.31,89.31,0,0,1,19.58,2.05l-6.23,26.53a54.54,54.54,0,0,0-10-1.06c-13.15.08-17.91,6.71-21.14,21L779.47,546h28c-3.27,15.22-18.49,35.69-34,35.69H772.1l-21,100.65Z"/><path class="cls-2" d="M794.44,682.38l33.84-160.13a43.12,43.12,0,0,1,42.18-34.18L829.38,682.38Z"/><path class="cls-2" d="M863.51,548.83a43.67,43.67,0,0,1,42.93,35.76c6.65,36.08,10.38,60.36,11.67,71.38h.63c5.55-10.74,18.77-35.75,39-73.53a63.61,63.61,0,0,1,56.07-33.61L941,675.19c-31.06,54.53-41.55,68.09-78.46,68.09h-.18a19.32,19.32,0,0,1-18.79-23.56l1.84-8.18A92.76,92.76,0,0,0,862,713c14.84,0,22.79-6.72,32.45-22.73Z"/><g class="cls-3"><rect class="cls-4" x="443.07" y="348.19" width="207.17" height="182.09" transform="translate(100.93 980.62) rotate(-89.32)"/></g><path class="cls-2" d="M569.29,573.22c-2.89,1.15-5.65,2.14-8.26,3a6.39,6.39,0,0,0-3.53,9.38c3.49,5.63,5.18,12.74,5.18,20.61,0,26.09-13.47,52.31-43.17,52.31-19.79,0-31.48-13.89-31.48-34.72,0-21.07,10-39.88,26.71-48.12,3.88-1.92,8.62-2.77,14.07-6,5.72-3.41,16.56-10.29,23.47-15.51a4.16,4.16,0,0,0-1.64-7.4A86.48,86.48,0,0,0,534,545.19c-52.44,0-81.73,37.34-81.73,80.28,0,32.71,21.17,60.73,64.87,60.56,56.27-.19,82-39.42,82-79.41,0-12.87-3.19-24.68-9.38-34.44a8.72,8.72,0,0,0-11.45-3.06l-.72.36c-2.73,1.39-5.53,2.64-8.32,3.74"/><g class="cls-5"><rect class="cls-6" x="448.24" y="421.11" width="170.85" height="143.47" transform="translate(34.48 1020.59) rotate(-89.32)"/></g><g class="cls-7"><rect class="cls-8" x="585.74" y="357.37" width="111.9" height="127.68" transform="translate(212.86 1057.83) rotate(-89.32)"/></g><path class="cls-9" d="M994,479.94a27.2,27.2,0,1,0,27.2,27.21A27.2,27.2,0,0,0,994,479.94m0,49.95a22.75,22.75,0,1,1,22.75-22.74A22.74,22.74,0,0,1,994,529.89"/><path class="cls-9" d="M988.52,510.11v9.95h-6.21V494.22h14.07c6,0,9.38,2.95,9.38,7.38a6.06,6.06,0,0,1-4.5,6.12c1,.41,3.84,1.43,3.84,6.08v1.28a20.91,20.91,0,0,0,.32,5H999c-.43-1.13-.48-2.66-.48-5.4v-.85c0-2.61-1-3.7-4.73-3.7Zm0-4.71H995c3,0,4.37-1.09,4.37-3.28,0-2-1.36-3.19-4.32-3.19h-6.51Z"/><path class="cls-2" d="M232.2,625.42c-12.68,36.89-42.5,60.86-92.2,60.86-55,0-81.23-33-81.23-80.18,0-56.49,38.18-111.38,105.82-111.38,47.51,0,75.58,26.08,78.18,63.85h-3.1c-17.46,0-33.62-8.18-45-21.44-6.5-7.57-17-13.26-33.25-13.26-43,0-63.52,42.39-63.52,80.7,0,29.4,12.26,52.57,45.65,52.57,16.31,0,28.32-4.72,37.62-14.11,10.87-11,25.37-17.61,40.82-17.61Z"/><path class="cls-2" d="M388.69,606.61c0,40-25.73,79.22-82,79.41-43.7.19-64.87-27.84-64.87-60.54,0-43,29.3-80.29,81.73-80.29,42.2,0,65.16,26.89,65.16,61.42M277.55,623.79c0,20.83,11.7,34.71,31.49,34.71,29.69,0,43.16-26.21,43.16-52.3,0-19.22-9.9-33.85-31.84-33.85-26.87,0-42.81,24.41-42.81,51.44"/><path class="cls-2" d="M388.69,682.38l33.85-160.13a43.1,43.1,0,0,1,42.17-34.18L423.63,682.38Z"/><path class="cls-2" d="M618.86,588.17q.72-3.43,1.46-6.92a41,41,0,0,1,40.06-32.42c-.44,4.84-2.38,17.27-4.6,27.33,12.09-21.66,28.82-30.3,52.16-30.11l-8.3,34.52c-28.36-.13-47.29,14.56-55.49,54.45l-9.86,47.36H599Z"/><path class="cls-2" d="M715.58,682.38l21-100.65H713.69L721.06,546H744l2.93-11.47c6.2-29.64,21-48.4,53.45-48.4a89.31,89.31,0,0,1,19.58,2.05l-6.23,26.53a54.54,54.54,0,0,0-10-1.06c-13.15.08-17.91,6.71-21.14,21L779.47,546h28c-3.27,15.22-18.49,35.69-34,35.69H772.1l-21,100.65Z"/><path class="cls-2" d="M794.44,682.38l33.84-160.13a43.12,43.12,0,0,1,42.18-34.18L829.38,682.38Z"/><path class="cls-2" d="M863.51,548.83a43.67,43.67,0,0,1,42.93,35.76c6.65,36.08,10.38,60.36,11.67,71.38h.63c5.55-10.74,18.77-35.75,39-73.53a63.61,63.61,0,0,1,56.07-33.61L941,675.19c-31.06,54.53-41.55,68.09-78.46,68.09h-.18a19.32,19.32,0,0,1-18.79-23.56l1.84-8.18A92.76,92.76,0,0,0,862,713c14.84,0,22.79-6.72,32.45-22.73Z"/><g class="cls-3"><rect class="cls-4" x="443.07" y="348.19" width="207.17" height="182.09" transform="translate(100.93 980.62) rotate(-89.32)"/></g><path class="cls-2" d="M569.29,573.22c-2.89,1.15-5.65,2.14-8.26,3a6.39,6.39,0,0,0-3.53,9.38c3.49,5.63,5.18,12.74,5.18,20.61,0,26.09-13.47,52.31-43.17,52.31-19.79,0-31.48-13.89-31.48-34.72,0-21.07,10-39.88,26.71-48.12,3.88-1.92,8.62-2.77,14.07-6,5.72-3.41,16.56-10.29,23.47-15.51a4.16,4.16,0,0,0-1.64-7.4A86.48,86.48,0,0,0,534,545.19c-52.44,0-81.73,37.34-81.73,80.28,0,32.71,21.17,60.73,64.87,60.56,56.27-.19,82-39.42,82-79.41,0-12.87-3.19-24.68-9.38-34.44a8.72,8.72,0,0,0-11.45-3.06l-.72.36c-2.73,1.39-5.53,2.64-8.32,3.74"/><g class="cls-5"><rect class="cls-6" x="448.24" y="421.11" width="170.85" height="143.47" transform="translate(34.48 1020.59) rotate(-89.32)"/></g><g class="cls-7"><rect class="cls-8" x="585.74" y="357.37" width="111.9" height="127.68" transform="translate(212.86 1057.83) rotate(-89.32)"/></g><path class="cls-9" d="M994,479.94a27.2,27.2,0,1,0,27.2,27.21A27.2,27.2,0,0,0,994,479.94m0,49.95a22.75,22.75,0,1,1,22.75-22.74A22.74,22.74,0,0,1,994,529.89"/><path class="cls-9" d="M988.52,510.11v9.95h-6.21V494.22h14.07c6,0,9.38,2.95,9.38,7.38a6.06,6.06,0,0,1-4.5,6.12c1,.41,3.84,1.43,3.84,6.08v1.28a20.91,20.91,0,0,0,.32,5H999c-.43-1.13-.48-2.66-.48-5.4v-.85c0-2.61-1-3.7-4.73-3.7Zm0-4.71H995c3,0,4.37-1.09,4.37-3.28,0-2-1.36-3.19-4.32-3.19h-6.51Z"/></svg>
           <div>
             <div class="text-xs uppercase tracking-[0.22em] footer-muted">Industrial Color Fidelity</div>
           </div>
@@ -1520,7 +1457,7 @@
         </div>
       </div>
 
-      <div class="mt-8 pt-6 border-t border-white/10 text-xs text-center footer-muted">
+      <div class="mt-8 pt-6 border-t border-blue-200/80 text-xs text-center footer-muted">
         <p>© 2026 Colorfly Industrial. All rights reserved.</p>
         <p class="mt-2">Waterland Road, Saggian, Lahore, Pakistan</p>
         <p class="mt-2">Email: <a class="underline" href="mailto:info@colorflypk.com">info@colorflypk.com</a></p>
@@ -1545,21 +1482,6 @@
       setActiveNav(id);
       window.scrollTo({top: 0, behavior: 'smooth'});
     }
-
-    function toggleTheme() {
-      const html = document.documentElement;
-      html.classList.toggle('dark');
-      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-    }
-
-    (function applySavedTheme(){
-      const saved = localStorage.getItem('theme');
-      if (saved === 'light') {
-        document.documentElement.classList.remove('dark');
-      } else {
-        document.documentElement.classList.add('dark');
-      }
-    })();
 
     document.addEventListener('DOMContentLoaded', () => {
       const activeSection = document.querySelector('.page-section.active');
